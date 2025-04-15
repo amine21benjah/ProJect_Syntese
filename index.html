@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExamEnLigne - Plateforme d'Examens en Ligne</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Check if user is logged in
+        function checkLoginStatus() {
+            fetch('check_login.php')
+                .then(response => response.json())
+                .then(data => {
+                    const loginBtn = document.getElementById('loginBtn');
+                    const loginBtnHero = document.getElementById('loginBtnHero');
+                    if (data.loggedIn) {
+                        if (loginBtn) loginBtn.style.display = 'none';
+                        if (loginBtnHero) loginBtnHero.style.display = 'none';
+                    } else {
+                        if (loginBtn) loginBtn.style.display = 'block';
+                        if (loginBtnHero) loginBtnHero.style.display = 'block';
+                    }
+                });
+        }
+
+        // Run when page loads
+        document.addEventListener('DOMContentLoaded', checkLoginStatus);
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-blue-600">ExamEnLigne</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600">Accueil</a>
+                    <a href="quizzes.php" class="text-gray-700 hover:text-blue-600">Examens</a>
+                    <a href="#" class="text-gray-700 hover:text-blue-600">Contact</a>
+                    <a href="./register.php" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">S'inscrire</a>
+                    <a href="./login.php" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Connexion</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+                <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+                    <div class="sm:text-center lg:text-left">
+                        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                            <span class="block">Passez vos examens</span>
+                            <span class="block text-blue-600">en toute simplicité</span>
+                        </h1>
+                        <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                            Une plateforme moderne et intuitive pour passer vos examens en ligne. Accédez à vos tests depuis n'importe où, à tout moment.
+                        </p>
+                        <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                            <div class="rounded-md shadow">
+                                <a href="quizzes.php" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 md:py-4 md:text-lg md:px-10">
+                                    Passer un Quiz
+                                </a>
+                            </div>
+                            <div class="mt-3 sm:mt-0 sm:ml-3">
+                                <a href="./register.php" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 md:py-4 md:text-lg md:px-10">
+                                    S'inscrire
+                                </a>
+                            </div>
+                            <div class="mt-3 sm:mt-0 sm:ml-3">
+                                <a href="./login.php" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10">
+                                    Connexion
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Latest Quizzes Section -->
+    <div class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Quizzes Disponibles
+                </h2>
+                <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+                    Découvrez nos derniers quizzes et testez vos connaissances
+                </p>
+            </div>
+            <div class="mt-10">
+                <div id="quizzesList" class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    <!-- Quizzes will be loaded here dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+                    Pourquoi choisir ExamEnLigne ?
+                </h2>
+            </div>
+            <div class="mt-10">
+                <div class="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
+                    <!-- Feature 1 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg transform transition duration-500 hover:scale-105">
+                        <div class="text-green-600 text-2xl mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Flexibilité</h3>
+                        <p class="text-gray-600">Passez vos examens quand vous le souhaitez, où que vous soyez.</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg transform transition duration-500 hover:scale-105">
+                        <div class="text-green-600 text-2xl mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Sécurité</h3>
+                        <p class="text-gray-600">Vos données sont protégées et vos résultats sont confidentiels.</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-white p-6 rounded-lg shadow-lg transform transition duration-500 hover:scale-105">
+                        <div class="text-green-600 text-2xl mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Rapidité</h3>
+                        <p class="text-gray-600">Résultats instantanés et feedback immédiat après vos examens.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-gray-400">
+                <p>&copy; 2025 ExamEnLigne. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Load available quizzes
+        function loadQuizzes() {
+            fetch('get_quizzes.php')
+                .then(response => response.json())
+                .then(quizzes => {
+                    const quizzesList = document.getElementById('quizzesList');
+                    quizzesList.innerHTML = '';
+                    
+                    quizzes.forEach(quiz => {
+                        const quizCard = `
+                            <div class="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-500 hover:scale-105">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold mb-2">${quiz.title}</h3>
+                                    <p class="text-gray-600 mb-4">${quiz.description}</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm text-gray-500">Durée: ${quiz.duration} min</span>
+                                        <a href="take_quiz.php?id=${quiz.id}" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700">
+                                            Commencer
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        quizzesList.innerHTML += quizCard;
+                    });
+                })
+                .catch(error => console.error('Error loading quizzes:', error));
+        }
+
+        // Load quizzes when page loads
+        document.addEventListener('DOMContentLoaded', loadQuizzes);
+    </script>
+</body>
+</html>
